@@ -7,7 +7,7 @@ Text Mining
 * VSMBM25
 * Likelihood-IR
 
-Results stored in the [Results](Results) folder.
+Results stored in the [Results](Result) folder.
 
 ---
 
