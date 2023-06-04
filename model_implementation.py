@@ -7,6 +7,7 @@ import string
 
 from stemming.porter2 import stem
 
+root_folder = "C:/Users/anjan/Downloads/task_1/task_1/"  #add root folder path 
 
 def addTerm(terms, term, stop_words):
     """
@@ -510,7 +511,7 @@ def implement_models(dataset_path, query_file, stop_words):
         print(f"Top 12 documents based on BM25 score for topic {query_numbers[i]}")
         print("--------------------------------------------------------------------------------------------")
         print_top_terms(bm25_scores)
-        with open(f'Result/Baseline/Baseline_{query_numbers[i]}Ranking.dat', 'w') as f:
+        with open(f'{root_folder}Result/Baseline/Baseline_{query_numbers[i]}Ranking.dat', 'w') as f:
             for id, doc in bm25_scores.items():
                 print(f"{id} {bm25_scores[id]}", file = f)
         f.close()
@@ -524,7 +525,7 @@ def implement_models(dataset_path, query_file, stop_words):
         print(f"Top 12 documents based on VSMBM25 score for topic {query_numbers[i]}")
         print("--------------------------------------------------------------------------------------------")
         print_top_terms(cos_sim_score)
-        with open(f'Result/vsmbm25/VSMBM25_{query_numbers[i]}Ranking.dat', 'w') as f:
+        with open(f'{root_folder}Result/vsmbm25/VSMBM25_{query_numbers[i]}Ranking.dat', 'w') as f:
             for id, doc in cos_sim_score.items():
                 print(f"{id} {cos_sim_score[id]}", file = f)
         f.close()
@@ -537,16 +538,9 @@ def implement_models(dataset_path, query_file, stop_words):
         print(f"Top 12 documents based on liklihood_ir score for topic {query_numbers[i]}")
         print("--------------------------------------------------------------------------------------------")
         print_top_terms(likelihood_score)
-        with open(f'Result/Likelihood_IR/likelihood_{query_numbers[i]}Ranking.dat', 'w') as f:
-            for id, doc in cos_sim_score.items():
-                print(f"{id} {cos_sim_score[id]}", file = f)
+        with open(f'{root_folder}Result/Likelihood_IR/likelihood_{query_numbers[i]}Ranking.dat', 'w') as f:
+            for id, doc in likelihood_score.items():
+                print(f"{id} {likelihood_score[id]}", file = f)
         f.close()
     print("Output write complete")
-
-if __name__ == "__main__":
-    # Defining stop words
-    stopwords_file = open('common-english-words.txt', 'r') 
-    stop_words = stopwords_file.read().split(',')
-    stopwords_file.close()
-    implement_models("Datasets", "Queries.txt", stop_words)
-
+          
