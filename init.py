@@ -52,8 +52,8 @@ if __name__ == "__main__":
     print("-------------------------------------------------------------------------------------------------------")
 
     print("T-test results for Baseline vs Likelihood model based on DCG: ")
-    print(t_test(p12_baseline, p12_likelihood))
+    print(t_test(dcg_baseline, dcg_likelihood))
     print("T-test results for Baseline vs Vector Space model based on DCG: ")
-    print(t_test(p12_baseline, p12_vsm))
+    print(t_test(dcg_baseline, dcg_vsm))
     print("T-test results for Likelihood vs Vector Space model based on DCG: ")
-    print(t_test(p12_likelihood, p12_vsm))
+    print(t_test(dcg_likelihood, dcg_vsm))

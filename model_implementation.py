@@ -360,6 +360,29 @@ def print_top_terms(term_weights):
         if count_top_terms == 12:
             break
 
+def get_narrative(query_file):
+    myfile = open(query_file, 'r') # file to read
+    start_end = False
+    file_ = myfile.readlines()
+    narr = []
+    #word_count = 0 
+    for line in file_:
+        line = line.strip()
+        if start_end == False:
+            if line.startswith("<narr> Narrative:"):
+                line = line.strip()
+                start_end = True
+                #print(line.replace("\n", " "), end="")
+        elif line.startswith("</Query>"):
+            start_end = False
+        else:
+            line = line.replace("<narr> Narrative:", "").replace("</Query>", "")
+            line = line.replace("\n", " ")
+            line = line.translate(str.maketrans('','', string.digits)).translate(str.maketrans(string.punctuation, ' '*len(string.punctuation)))
+            narr.append(line)
+    narr = list(filter(lambda x: x != "", narr))
+    myfile.close()
+    return narr
 
 def vector_space_model(query_terms, coll):
     """
@@ -475,6 +498,8 @@ def implement_models(dataset_path, query_file, stop_words):
     datasets = []
     queries = []
     query_numbers = []
+    query_narr = get_narrative(query_file)
+
     entries = os.listdir(dataset_path)
     for dataset in entries:
         entry_path = os.path.join(dataset_path, dataset)
@@ -518,7 +543,8 @@ def implement_models(dataset_path, query_file, stop_words):
         '''
         VECTOR SPACE MODEL SCORE
         '''
-        cos_sim_score = vector_space_model(query_terms, coll)
+        query_narr_terms = parse_query(query_narr[i], stop_words)
+        cos_sim_score = vector_space_model(query_narr_terms, coll)
         cos_sim_score = {k: v for k, v in sorted(cos_sim_score.items(), key=lambda item: item[1], reverse=True)}
         #Print Top-12 terms
         print("--------------------------------------------------------------------------------------------")
