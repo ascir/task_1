@@ -7,7 +7,7 @@ import string
 
 from stemming.porter2 import stem
 
-root_folder = "C:/Users/anjan/Downloads/task_1/task_1/"  #add root folder path 
+root_folder = ""  #add root folder path 
 
 def addTerm(terms, term, stop_words):
     """

@@ -1,0 +1,58 @@
+Pre-requisite: Current version of python (prefereably 3.10) & pip installed.
+
+Folder Structure
+
+├───DataSets
+├───Queries.txt
+├───common-english-words
+├───env
+├───Feedback
+└───Result
+    ├───Baseline
+    ├───Likelihood_IR
+    ├───Precision
+    ├───top_12_results.txt
+    └───vsmbm25
+├───init.py
+├───model_implementation.py
+├───model_effectiveness.py 
+└───t_test.py
+
+Input files: 
+- Datasets 
+- Query & Stop Words for models, Feedback for calculating precision
+
+Output files: 
+All outputs are stored in the Result folder. 
+- Baseline, Likelihood_IR and vsmbm25 store individual model results. 
+- Precision folder holds average precision, precision@12 and DCG results abbreviated as _AP, _P12, _dcg respectively.
+- top_12_results.txt file hold top 12 scores from all 3 models and also T-test results. This is what we expect to see when we run the code.
+
+Python files:
+- init.py is the initialization file that imports modules from other files. This is the file we run to get results.
+- model_implementation.py contains the code to all the 3 models implemented
+- model_effectiveness.py contains the code to the computation of all 3 precision measures used
+- t_test.py contains code to implement and obtain t-test results
+
+
+Running the code:
+
+STEP 1: Navigate to model_implementation.py and update the path of the root folder where this folder is saved in your PC. Example: "C:/Downloads". 
+STEP 2: Initialize the environment by running
+    ```
+    ./env/Scripts/activate
+    ```
+    on Windows OS in Powershell/CMD.
+    
+    OR
+    ```
+    source ./env/Scripts/activate
+    ```
+    on Linux based terminal (including OSX)
+    Note: Only stemming is used as an external package throughout this code
+STEP 3: Run the code using the init.py file in your terminal/powershell to see output. Make sure you are in the root folder when you do so. 
+
+    ```
+    python init.py
+    ```
+---
